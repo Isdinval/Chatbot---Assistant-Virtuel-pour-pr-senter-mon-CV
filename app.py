@@ -61,8 +61,6 @@ conversations_collection = db['conversations']
 # Retrieve OpenAI API key from environment variables or Streamlit secrets
 # openai_api_key = st.secrets["OPENAI_API_KEY"]
 
-unset http_proxy
-unset https_proxy
 
 try:
     # Access the API key from Streamlit secrets
