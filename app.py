@@ -65,11 +65,13 @@ try:
     # Access the API key from Streamlit secrets
     openai_api_key = st.secrets["OPENAI_API_KEY"]
     # Initialize OpenAIEmbeddings with the API key from secrets
-    embeddings = OpenAIEmbeddings(openai_api_key=api_key)
+    embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
     st.write(openai_api_key)
 except KeyError as e:
+    st.write('1')
     st.error(f"Missing secret: {e}")
 except Exception as e:
+    st.write('2')
     st.error(f"Error initializing OpenAIEmbeddings: {e}")
 
 
