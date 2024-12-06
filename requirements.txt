@@ -6,3 +6,4 @@ pandas
 faiss-cpu==1.8.0
 pymongo==4.6.2
 langchain_openai
+pydantic
