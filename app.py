@@ -61,12 +61,16 @@ conversations_collection = db['conversations']
 # Retrieve OpenAI API key from environment variables or Streamlit secrets
 # openai_api_key = st.secrets["OPENAI_API_KEY"]
 
+unset http_proxy
+unset https_proxy
+
 try:
     # Access the API key from Streamlit secrets
     openai_api_key = st.secrets["OPENAI_API_KEY"]
     # Initialize OpenAIEmbeddings with the API key from secrets
     embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
     st.write(openai_api_key)
+    st.write(embeddings)
 except KeyError as e:
     st.write('1')
     st.error(f"Missing secret: {e}")
