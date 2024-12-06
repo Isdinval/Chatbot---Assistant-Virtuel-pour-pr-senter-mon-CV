@@ -61,6 +61,21 @@ conversations_collection = db['conversations']
 # Retrieve OpenAI API key from environment variables or Streamlit secrets
 openai_api_key = st.secrets["OPENAI_API_KEY"]
 
+try:
+    # Access the API key from Streamlit secrets
+    openai_api_key = st.secrets["OPENAI_API_KEY"]
+    # Initialize OpenAIEmbeddings with the API key from secrets
+    embeddings = OpenAIEmbeddings(openai_api_key=api_key)
+except KeyError as e:
+    st.error(f"Missing secret: {e}")
+except Exception as e:
+    st.error(f"Error initializing OpenAIEmbeddings: {e}")
+
+
+
+
+
+
 # Create Streamlit title and provide additional information about the bot
 st.title("Olivier RAYMOND - Virtual Assistant")
 
@@ -112,7 +127,7 @@ def store_conversation(conversation_id, user_message, bot_message, answered):
     conversations_collection.insert_one(data)
 
 # Initialize OpenAI embeddings
-embeddings = OpenAIEmbeddings()
+# embeddings = OpenAIEmbeddings()
 
 # Load or create a FAISS vector store
 if os.path.exists(faiss_index):
