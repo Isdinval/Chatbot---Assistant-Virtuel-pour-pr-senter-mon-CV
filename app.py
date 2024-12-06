@@ -8,7 +8,6 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import PyPDFLoader, CSVLoader
 from langchain_community.embeddings import OpenAIEmbeddings
-# from langchain.embeddings import OpenAIEmbeddings
 # from langchain.vectorstores import Chroma
 # from langchain.prompts import PromptTemplate
 from langchain.prompts import load_prompt
@@ -40,8 +39,11 @@ def is_valid_json(data):
     except json.JSONDecodeError:
         return False
 
-# Retrieve MongoDB password from Streamlit secrets
-mongodB_pass = st.secrets["mongodB_pass"]
+# Retrieve MongoDB password from environment variables or Streamlit secrets
+if "mongodB_pass" in os.environ:
+    mongodB_pass = os.getenv("mongodB_pass")
+else:
+    mongodB_pass = st.secrets["mongodB_pass"]
 
 # Define the MongoDB URI with the password - Store conversations for deeper analysis
 uri = "mongodb+srv://olivierraymond17:" + mongodB_pass + "@clustermongodbolivier.wsvgu.mongodb.net/?retryWrites=true&w=majority&appName=ClusterMongoDBOLIVIER"
@@ -59,27 +61,10 @@ db = client['conversations_db']
 conversations_collection = db['conversations']
 
 # Retrieve OpenAI API key from environment variables or Streamlit secrets
-# openai_api_key = st.secrets["OPENAI_API_KEY"]
-
-
-try:
-    # Access the API key from Streamlit secrets
+if "OPENAI_API_KEY" in os.environ:
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+else:
     openai_api_key = st.secrets["OPENAI_API_KEY"]
-    # Initialize OpenAIEmbeddings with the API key from secrets
-    embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
-    st.write(openai_api_key)
-    st.write(embeddings)
-except KeyError as e:
-    st.write('1')
-    st.error(f"Missing secret: {e}")
-except Exception as e:
-    st.write('2')
-    st.error(f"Error initializing OpenAIEmbeddings: {e}")
-
-
-
-
-
 
 # Create Streamlit title and provide additional information about the bot
 st.title("Olivier RAYMOND - Virtual Assistant")
@@ -132,7 +117,7 @@ def store_conversation(conversation_id, user_message, bot_message, answered):
     conversations_collection.insert_one(data)
 
 # Initialize OpenAI embeddings
-# embeddings = OpenAIEmbeddings()
+embeddings = OpenAIEmbeddings()
 
 # Load or create a FAISS vector store
 if os.path.exists(faiss_index):
