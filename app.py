@@ -47,7 +47,13 @@ else:
 
 # Define the MongoDB URI with the password - Store conversations for deeper analysis
 uri = "mongodb+srv://olivierraymond17:" + mongodB_pass + "@clustermongodbolivier.wsvgu.mongodb.net/?retryWrites=true&w=majority&appName=ClusterMongoDBOLIVIER"
-
+try:
+    client = MongoClient(uri)
+    client.admin.command("ping")  # Check if the server is reachable
+    print("Connection successful!")
+except Exception as e:
+    print(f"Connection failed: {e}")
+    
 # Function to initialize a MongoDB connection (cached for efficiency)
 @st.cache_resource
 def init_connection():
