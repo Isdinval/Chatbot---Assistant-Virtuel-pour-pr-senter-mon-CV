@@ -8,7 +8,7 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import PyPDFLoader, CSVLoader
 # from langchain_community.embeddings import OpenAIEmbeddings
-from langchain_openai import OpenAIEmbeddings
+from langchain.embeddings import OpenAIEmbeddings
 # from langchain.vectorstores import Chroma
 # from langchain.prompts import PromptTemplate
 from langchain.prompts import load_prompt
