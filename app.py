@@ -39,11 +39,8 @@ def is_valid_json(data):
     except json.JSONDecodeError:
         return False
 
-# Retrieve MongoDB password from environment variables or Streamlit secrets
-if "mongodB_pass" in os.environ:
-    mongodB_pass = os.getenv("mongodB_pass")
-else:
-    mongodB_pass = st.secrets["mongodB_pass"]
+# Retrieve MongoDB password from Streamlit secrets
+mongodB_pass = st.secrets["mongodB_pass"]
 
 # Define the MongoDB URI with the password - Store conversations for deeper analysis
 uri = "mongodb+srv://olivierraymond17:" + mongodB_pass + "@clustermongodbolivier.wsvgu.mongodb.net/?retryWrites=true&w=majority&appName=ClusterMongoDBOLIVIER"
@@ -61,10 +58,7 @@ db = client['conversations_db']
 conversations_collection = db['conversations']
 
 # Retrieve OpenAI API key from environment variables or Streamlit secrets
-if "OPENAI_API_KEY" in os.environ:
-    openai_api_key = os.getenv("OPENAI_API_KEY")
-else:
-    openai_api_key = st.secrets["OPENAI_API_KEY"]
+openai_api_key = st.secrets["OPENAI_API_KEY"]
 
 # Create Streamlit title and provide additional information about the bot
 st.title("Olivier RAYMOND - Virtual Assistant")
