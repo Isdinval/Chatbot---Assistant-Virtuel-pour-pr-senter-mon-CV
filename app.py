@@ -66,6 +66,7 @@ try:
     openai_api_key = st.secrets["OPENAI_API_KEY"]
     # Initialize OpenAIEmbeddings with the API key from secrets
     embeddings = OpenAIEmbeddings(openai_api_key=api_key)
+    st.write(openai_api_key)
 except KeyError as e:
     st.error(f"Missing secret: {e}")
 except Exception as e:
