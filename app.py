@@ -59,7 +59,7 @@ db = client['conversations_db']
 conversations_collection = db['conversations']
 
 # Retrieve OpenAI API key from environment variables or Streamlit secrets
-openai_api_key = st.secrets["OPENAI_API_KEY"]
+# openai_api_key = st.secrets["OPENAI_API_KEY"]
 
 try:
     # Access the API key from Streamlit secrets
