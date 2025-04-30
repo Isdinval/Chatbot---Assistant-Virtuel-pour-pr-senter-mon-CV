@@ -98,20 +98,21 @@ with st.expander("⚠️ Informations importantes"):
 path = os.path.dirname(__file__)
 
 # Load prompt template from a JSON file to query openai
-# prompt_template = path + "/templates/template.json"
-# prompt = load_prompt(prompt_template)
-
 script_dir = os.path.dirname(__file__)
 template_path = os.path.join(script_dir, "templates", "template.json")
 prompt = load_prompt(template_path)
 
 
 # Define the FAISS index path - Loading embedings
-faiss_index = path + "/faiss_index"
+faiss_index_path = os.path.join(script_dir, "faiss_index")
+faiss_index = faiss_index_path 
 
 # Define paths for the data sources
-data_source = path + "/data/about_me.csv"
-pdf_source = path + "/data/resume.pdf"
+data_source_path = os.path.join(script_dir, "data", "about_me.csv")
+data_source = data_source_path 
+
+pdf_source_path = os.path.join(script_dir, "data", "resume.pdf")
+pdf_source = pdf_source_path 
 
 
 # Function to store conversation data into MongoDB
