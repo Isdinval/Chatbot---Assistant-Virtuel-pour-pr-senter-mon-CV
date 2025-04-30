@@ -98,8 +98,12 @@ with st.expander("⚠️ Informations importantes"):
 path = os.path.dirname(__file__)
 
 # Load prompt template from a JSON file to query openai
-prompt_template = path + "/templates/template.json"
-prompt = load_prompt(prompt_template)
+# prompt_template = path + "/templates/template.json"
+# prompt = load_prompt(prompt_template)
+
+script_dir = os.path.dirname(__file__)
+template_path = os.path.join(script_dir, "templates", "template.json")
+prompt = load_prompt(template_path)
 
 
 # Define the FAISS index path - Loading embedings
