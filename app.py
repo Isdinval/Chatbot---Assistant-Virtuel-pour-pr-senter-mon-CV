@@ -137,6 +137,7 @@ else:
     # Create a new FAISS index from the data sources
     if data_source:
         # Load data from PDF and CSV sources
+        print(f"pdf_source: {pdf_source}")
         pdf_loader = PyPDFLoader(pdf_source)
         pdf_data = pdf_loader.load_and_split()
         csv_loader = CSVLoader(file_path=data_source, encoding="utf-8")
