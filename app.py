@@ -95,13 +95,14 @@ with st.expander("⚠️ Informations importantes"):
 
 
 # Define the path for files and templates
-path = os.path.dirname(__file__)
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Print the script directory to debug
+print(f"Script directory: {script_dir}")
 
 # Load prompt template from a JSON file to query openai
-script_dir = os.path.dirname(__file__)
 template_path = os.path.join(script_dir, "templates", "template.json")
 prompt = load_prompt(template_path)
-
 
 # Define the FAISS index path - Loading embedings
 faiss_index_path = os.path.join(script_dir, "faiss_index")
@@ -113,6 +114,20 @@ data_source = data_source_path
 
 pdf_source_path = os.path.join(script_dir, "data", "resume.pdf")
 pdf_source = pdf_source_path 
+
+# Print file paths to debug
+print(f"Template path: {template_path}")
+print(f"FAISS index path: {faiss_index_path}")
+print(f"CSV data source: {data_source}")
+print(f"PDF source: {pdf_source}")
+
+# Check if files exist
+print(f"Template exists: {os.path.exists(template_path)}")
+print(f"FAISS index exists: {os.path.exists(faiss_index_path)}")
+print(f"CSV data exists: {os.path.exists(data_source)}")
+print(f"PDF exists: {os.path.exists(pdf_source)}")
+
+
 
 
 # Function to store conversation data into MongoDB
